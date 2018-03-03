@@ -1,6 +1,6 @@
-h1. Karaf Tutorial Part 1 - Installation and First application
+# Karaf Tutorial Part 1 - Installation and First application
 
-h1. Getting Started
+# Getting Started
 {excerpt:atlassian-macro-output-type=INLINE}With this post I am beginning a series of posts about Apache Karaf, an OSGi container based on Equinox or Felix. The main difference to these frameworks is that it brings excellent management features with it.{excerpt}
 
 Outstanding features of Karaf:
@@ -12,9 +12,9 @@ Outstanding features of Karaf:
 All together these features make developing server based OSGi applications almost as easy as regular java applications. Deployment and management is on a level that is much better than all applications servers I have seen till now. All this is combined with a small footprint as well of karaf as the resulting applications. In my opinion this allows a light weight development style like JEE 6 together with the flexibility of spring applications.
 
 
-h1. Installation and first startup
+# Installation and first startup
 
-h1. 
+# 
 * Download Karaf 4.0.7 from the [Karaf web site|http://karaf.apache.org/].
 * Extract and start with bin/karaf
 You should see the welcome screen:
@@ -35,9 +35,8 @@ karaf@root()>
 {code}
 
 
-h1. Some handy commands
-
-h1. 
+# Some handy commands
+ 
 ||Command||Description||
 |{noformat}
 la
@@ -74,9 +73,9 @@ It can be reached at [http://localhost:8181/system/console|http://localhost:8181
 {note:title=Check the logs}Karaf is very silent. To not miss error messages always keep a tail -f data/karaf.log open !!{note}
 
 
-h1. Tasklist - A small osgi application
+# Tasklist - A small osgi application
 
-h1. Without any useful application Karaf is a nice but useless container. So let´s create our first application. The good news is that creating an OSGi application is quite easy and\\
+# Without any useful application Karaf is a nice but useless container. So let´s create our first application. The good news is that creating an OSGi application is quite easy and\\
 maven can help a lot. The difference to a normal maven project is quite small. To write the application I recommend to use Eclipse 4 with the m2eclipse plugin which is installed by default on current versions.
 
 Get the source code from the [Karaf-Tutorial repo at github|https://github.com/cschneider/Karaf-Tutorial/tree/master/tasklist].
@@ -102,22 +101,22 @@ The [tasklist example|https://github.com/cschneider/Karaf-Tutorial/tree/master/
 |tasklist-features|Features descriptor for the application that makes installing in Karaf very easy|
 
 
-h2. Parent pom and general project setup
+# Parent pom and general project setup
 
-h1. The pom.xml is of packaging bundle and the maven-bundle-plugin creates the jar with an OSGi Manifest. By default the plugin imports all packages that are imported in java files or referenced in the blueprint context.
+# The pom.xml is of packaging bundle and the maven-bundle-plugin creates the jar with an OSGi Manifest. By default the plugin imports all packages that are imported in java files or referenced in the blueprint context.
 
 It also exports all packages that do not contain the string impl or internal. In our case we want the model package to be imported but not the persistence.impl package. As the naming convention is used\\
 we need no additional configuration.
 
 
-h2. Tasklist-model
+## Tasklist-model
 
-h1. This project contains the domain model in our case it is the Task class and a TaskService interface. The model is used by both the persistence implementation and the user interface.  Any user of the TaskService will only need the model. So it is never directly bound to our current implementation.
+# This project contains the domain model in our case it is the Task class and a TaskService interface. The model is used by both the persistence implementation and the user interface.  Any user of the TaskService will only need the model. So it is never directly bound to our current implementation.
 
 
-h2. Tasklist-persistence
+## Tasklist-persistence
 
-h1. The very simple persistence implementation TaskServiceImpl manages tasks in a simple HashMap. The class uses the @Singleton annotation to expose the class as an blueprint bean.
+The very simple persistence implementation TaskServiceImpl manages tasks in a simple HashMap. The class uses the @Singleton annotation to expose the class as an blueprint bean.
 
 The annotation  @OsgiServiceProvider will expose the bean as an OSGi service and the @Properties annotation allows to add serice properties. In our case the property service.exported.interfaces we set can be used by CXF-DOSGi which we present  in a later tutorial. For this tutorial the properties could also be removed.
 {code:language=java}@OsgiServiceProvider
@@ -136,7 +135,7 @@ The blueprint-maven-plugin will process the class above and automatically create
 
 {code}
 
-{color:#003366}Tasklist-ui{color}
+## Tasklist-ui
 
 The ui project contains a small servlet TaskServlet to display the tasklist and individual tasks. To work with the tasks the servlet needs the TaskService. We inject the TaskService by using the annotation @Inject which is able to inject any bean by type and the annotation @OsgiService which creates a blueprint reference to an OSGiSerivce of the given type.
 
@@ -152,7 +151,6 @@ public class TaskListServlet extends HttpServlet {
 }
 {code}
 
-\\
 
 {code:language=xml|title=Automatically created blueprint xml can be found in target/generated-resources}<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0">
 	<reference id="taskService" availability="mandatory" interface="net.lr.tasklist.model.TaskService" />
@@ -171,9 +169,9 @@ public class TaskListServlet extends HttpServlet {
 See also: [http://wiki.ops4j.org/display/paxweb/Whiteboard+Extender|http://wiki.ops4j.org/display/paxweb/Whiteboard+Extender]
 
 
-h2. Tasklist-features
+## Tasklist-features
 
-h1. The last project only installs a feature descriptor to the maven repository so we can install it easily in Karaf. The descriptor defines a feature named tasklist and the bundles to be installed from\\
+The last project only installs a feature descriptor to the maven repository so we can install it easily in Karaf. The descriptor defines a feature named tasklist and the bundles to be installed from\\
 the maven repository.
 {code:language=xml}<feature name="example-tasklist-persistence" version="${pom.version}">
     <bundle>mvn:net.lr.tasklist/tasklist-model/${pom.version}</bundle>
@@ -192,9 +190,9 @@ the maven repository.
 A feature can consist of other features that also should be installed and bundles to be installed. The bundles typically use mvn urls. This means they are loaded from the configured maven repositories or your local maven repositiory in ~/.m2/repository.
 
 
-h1. Installing the Application in Karaf
+# Installing the Application in Karaf
 
-h1. {code:language=xml}feature:repo-add mvn:net.lr.tasklist/tasklist-features/1.0.0-SNAPSHOT/xml
+{code:language=xml}feature:repo-add mvn:net.lr.tasklist/tasklist-features/1.0.0-SNAPSHOT/xml
 feature:install example-tasklist-persistence example-tasklist-ui
 
 {code}
@@ -204,19 +202,19 @@ Add the features descriptor to Karaf so it is added to the available features, t
 {code}
 
 Check that all bundles of tasklist are active. If not try to start them and check the log.
-{code}http:list
+
+## http:list
 
 ID | Servlet         | Servlet-Name   | State       | Alias     | Url
 -------------------------------------------------------------------------------
 56 | TaskListServlet | ServletModel-2 | Deployed    | /tasklist | [/tasklist/*]
-{code}
 
 Should show the TaskListServlet. By default the example will start at [http://localhost:8181/tasklist|http://localhost:8181/tasklist] .
 
 You can change the port by creating aa text file in "etc/org.ops4j.pax.web.cfg" with the content "org.osgi.service.http.port=8080". This will tell the HttpService to use the port 8080. Now the tasklist application should be available at [http://localhost:8080/tasklist|http://localhost:8080/tasklist]
 
 
-h1. Summary
+# Summary
 
 h1. In this tutorial we have installed Karaf and learned some commands. Then we created a small OSGi application that shows servlets, OSGi services, blueprint and the whiteboard pattern.
 
