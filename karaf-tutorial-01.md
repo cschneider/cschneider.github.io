@@ -62,7 +62,7 @@ Karaf is very silent. To not miss error messages always keep a tail -f data/kara
 
 # Tasklist - A small osgi application
 
-# Without any useful application Karaf is a nice but useless container. So let´s create our first application. The good news is that creating an OSGi application is quite easy and\\
+Without any useful application Karaf is a nice but useless container. So let´s create our first application. The good news is that creating an OSGi application is quite easy and\\
 maven can help a lot. The difference to a normal maven project is quite small. To write the application I recommend to use Eclipse 4 with the m2eclipse plugin which is installed by default on current versions.
 
 Get the source code from the [Karaf-Tutorial repo at github|https://github.com/cschneider/Karaf-Tutorial/tree/master/tasklist].
@@ -89,7 +89,7 @@ The [tasklist example|https://github.com/cschneider/Karaf-Tutorial/tree/master/
 
 # Parent pom and general project setup
 
-# The pom.xml is of packaging bundle and the maven-bundle-plugin creates the jar with an OSGi Manifest. By default the plugin imports all packages that are imported in java files or referenced in the blueprint context.
+The pom.xml is of packaging bundle and the maven-bundle-plugin creates the jar with an OSGi Manifest. By default the plugin imports all packages that are imported in java files or referenced in the blueprint context.
 
 It also exports all packages that do not contain the string impl or internal. In our case we want the model package to be imported but not the persistence.impl package. As the naming convention is used\\
 we need no additional configuration.
@@ -97,7 +97,7 @@ we need no additional configuration.
 
 ## Tasklist-model
 
-# This project contains the domain model in our case it is the Task class and a TaskService interface. The model is used by both the persistence implementation and the user interface.  Any user of the TaskService will only need the model. So it is never directly bound to our current implementation.
+This project contains the domain model in our case it is the Task class and a TaskService interface. The model is used by both the persistence implementation and the user interface.  Any user of the TaskService will only need the model. So it is never directly bound to our current implementation.
 
 
 ## Tasklist-persistence
@@ -209,7 +209,7 @@ You can change the port by creating aa text file in "etc/org.ops4j.pax.web.cfg" 
 
 # Summary
 
-h1. In this tutorial we have installed Karaf and learned some commands. Then we created a small OSGi application that shows servlets, OSGi services, blueprint and the whiteboard pattern.
+In this tutorial we have installed Karaf and learned some commands. Then we created a small OSGi application that shows servlets, OSGi services, blueprint and the whiteboard pattern.
 
 In the next tutorial we take a look at using Apache Camel and Apache CXF on OSGi.
 
