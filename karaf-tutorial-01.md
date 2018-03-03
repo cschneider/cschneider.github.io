@@ -14,11 +14,12 @@ All together these features make developing server based OSGi applications almos
 
 # Installation and first startup
 
-# 
 * Download Karaf 4.0.7 from the [Karaf web site|http://karaf.apache.org/].
 * Extract and start with bin/karaf
 You should see the welcome screen:
-{code}        __ __                  ____
+
+```
+        __ __                  ____
        / //_/____ __________ _/ __/
       / ,<  / __ `/ ___/ __ `/ /_
      / /| |/ /_/ / /  / /_/ / __/
@@ -32,45 +33,31 @@ Hit '<ctrl-d>' or 'osgi:shutdown' to shutdown Karaf.
 
 karaf@root()>
 
-{code}
+```
 
 
 # Some handy commands
  
 ||Command||Description||
-|{noformat}
-la
-{noformat}
-|Shows all installed bundles|
+|la|Shows all installed bundles|
 |list|Show user bundles|
-|{noformat}
-service:list
-{noformat}
-|Shows the active OSGi services. This list is quite long. Here it is quite handy that you can use unix pipes like "ls | grep admin"|
-|{noformat}
-exports
-{noformat}
-|Shows exported packages and bundles providing them. This helps to find out where a package may come from.|
-|{noformat}
-feature:list
-{noformat}
-|Shows which features are installed and can be installed.|
-|{noformat}
-feature:install webconsole
-{noformat}
-|Install features (a list of bundles and other features). Using the above command we install the Karaf webconsole.\\ \\
+|service:list|Shows the active OSGi services. This list is quite long. Here it is quite handy that you can use unix pipes like "ls | grep admin"|
+|exports|Shows exported packages and bundles providing them. This helps to find out where a package may come from.|
+|feature:list|Shows which features are installed and can be installed.|
+|feature:install webconsole|Install features (a list of bundles and other features). Using the above command we install the Karaf webconsole.\\ \\
 It can be reached at [http://localhost:8181/system/console|http://localhost:8181/system/console] . Log in with karaf/karaf and take some time to see what it has to offer.|
 |diag|Show diagnostic information for bundles that could not be started|
 |log:tail|Show the log. Use ctrl-c to  go back to Console|
 |Ctrl-d|Exit the console. If this is the main console karaf will also be stopped.|
 
-\\
 
-{note:title=OSGi containers preserve state after restarts}Please note that Karaf like all osgi containers maintains it´s last state of installed and started bundles. So if something should not work anymore a restart is not sure to help. To really start fresh again stop karaf and delete the data directory or start with bin/karaf clean.{note}
+```
+OSGi containers preserve state after restarts}Please note that Karaf like all osgi containers maintains it´s last state of installed and started bundles. So if something should not work anymore a restart is not sure to help. To really start fresh again stop karaf and delete the data directory or start with bin/karaf clean.
+```
 
-\\
-
-{note:title=Check the logs}Karaf is very silent. To not miss error messages always keep a tail -f data/karaf.log open !!{note}
+```
+Karaf is very silent. To not miss error messages always keep a tail -f data/karaf.log open !!
+```
 
 
 # Tasklist - A small osgi application
@@ -79,8 +66,8 @@ It can be reached at [http://localhost:8181/system/console|http://localhost:8181
 maven can help a lot. The difference to a normal maven project is quite small. To write the application I recommend to use Eclipse 4 with the m2eclipse plugin which is installed by default on current versions.
 
 Get the source code from the [Karaf-Tutorial repo at github|https://github.com/cschneider/Karaf-Tutorial/tree/master/tasklist].
-{code:language=bash}git clone https://github.com/cschneider/Karaf-Tutorial.git
-{code}
+
+	git clone https://github.com/cschneider/Karaf-Tutorial.git
 
 or download the sample project from [https://github.com/cschneider/Karaf-Tutorial/zipball/master|https://github.com/cschneider/Karaf-Tutorial/zipball/master] and extract to a directory.
 
@@ -100,7 +87,6 @@ The [tasklist example|https://github.com/cschneider/Karaf-Tutorial/tree/master/
 |tasklist-ui|Servlet that displays the tasklist using a TaskService|
 |tasklist-features|Features descriptor for the application that makes installing in Karaf very easy|
 
-
 # Parent pom and general project setup
 
 # The pom.xml is of packaging bundle and the maven-bundle-plugin creates the jar with an OSGi Manifest. By default the plugin imports all packages that are imported in java files or referenced in the blueprint context.
@@ -119,21 +105,25 @@ we need no additional configuration.
 The very simple persistence implementation TaskServiceImpl manages tasks in a simple HashMap. The class uses the @Singleton annotation to expose the class as an blueprint bean.
 
 The annotation  @OsgiServiceProvider will expose the bean as an OSGi service and the @Properties annotation allows to add serice properties. In our case the property service.exported.interfaces we set can be used by CXF-DOSGi which we present  in a later tutorial. For this tutorial the properties could also be removed.
-{code:language=java}@OsgiServiceProvider
+
+```
+@OsgiServiceProvider
 @Properties(@Property(name = "service.exported.interfaces", value = "*"))
 @Singleton
 public class TaskServiceImpl implements TaskService {
 	...
 }
-{code}
+```
 
 The blueprint-maven-plugin will process the class above and automatically create the suitable blueprint xml. So this saves us from writing blueprint xml by hand.
-{code:language=xml|title=Automatically created blueprint xml can be found in target/generated-resources}<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0">
+
+Automatically created blueprint xml can be found in target/generated-resources
+```
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0">
 	<bean id="taskService" class="net.lr.tasklist.persistence.impl.TaskServiceImpl" />
 	<service ref="taskService" interface="net.lr.tasklist.model.TaskService" />
 </blueprint>
-
-{code}
+```
 
 ## Tasklist-ui
 
@@ -142,17 +132,19 @@ The ui project contains a small servlet TaskServlet to display the tasklist and 
 The whole class is exposed as an OSGi service of interface java.http.Servlet with a special property alias=/tasklist. This triggers the whiteboard extender of pax web which picks up the service and exports it as a servlet at the relative url /tasklist.
 
 Snippet of the relevant code:
-{code:language=java}@OsgiServiceProvider(classes = Servlet.class)
+```
+@OsgiServiceProvider(classes = Servlet.class)
 @Properties(@Property(name = "alias", value = "/tasklist"))
 @Singleton
 public class TaskListServlet extends HttpServlet {
     @Inject @OsgiService
     TaskService taskService;
 }
-{code}
+```
 
-
-{code:language=xml|title=Automatically created blueprint xml can be found in target/generated-resources}<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0">
+Automatically generated xml:
+```
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0">
 	<reference id="taskService" availability="mandatory" interface="net.lr.tasklist.model.TaskService" />
 	<bean id="taskServlet" class="net.lr.tasklist.ui.TaskListServlet">
 		<property name="taskService" ref="taskService"></property>
@@ -163,8 +155,7 @@ public class TaskListServlet extends HttpServlet {
 		</service-properties>
 	</service>
 </blueprint>
-
-{code}
+```
 
 See also: [http://wiki.ops4j.org/display/paxweb/Whiteboard+Extender|http://wiki.ops4j.org/display/paxweb/Whiteboard+Extender]
 
@@ -173,7 +164,9 @@ See also: [http://wiki.ops4j.org/display/paxweb/Whiteboard+Extender|http://wiki
 
 The last project only installs a feature descriptor to the maven repository so we can install it easily in Karaf. The descriptor defines a feature named tasklist and the bundles to be installed from\\
 the maven repository.
-{code:language=xml}<feature name="example-tasklist-persistence" version="${pom.version}">
+
+```
+<feature name="example-tasklist-persistence" version="${pom.version}">
     <bundle>mvn:net.lr.tasklist/tasklist-model/${pom.version}</bundle>
     <bundle>mvn:net.lr.tasklist/tasklist-persistence/${pom.version}</bundle>
 </feature>
@@ -184,22 +177,22 @@ the maven repository.
     <bundle>mvn:net.lr.tasklist/tasklist-model/${pom.version}</bundle>
     <bundle>mvn:net.lr.tasklist/tasklist-ui/${pom.version}</bundle>
 </feature>
-
-{code}
+```
 
 A feature can consist of other features that also should be installed and bundles to be installed. The bundles typically use mvn urls. This means they are loaded from the configured maven repositories or your local maven repositiory in ~/.m2/repository.
 
 
 # Installing the Application in Karaf
 
-{code:language=xml}feature:repo-add mvn:net.lr.tasklist/tasklist-features/1.0.0-SNAPSHOT/xml
+```
+feature:repo-add mvn:net.lr.tasklist/tasklist-features/1.0.0-SNAPSHOT/xml
 feature:install example-tasklist-persistence example-tasklist-ui
-
-{code}
+```
 
 Add the features descriptor to Karaf so it is added to the available features, then Install and start the tasklist feature. After this command the tasklist application should run
-{code}list 
-{code}
+```
+list 
+```
 
 Check that all bundles of tasklist are active. If not try to start them and check the log.
 
