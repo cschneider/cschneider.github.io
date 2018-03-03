@@ -210,7 +210,3 @@ You can change the port by creating aa text file in "etc/org.ops4j.pax.web.cfg" 
 # Summary
 
 In this tutorial we have installed Karaf and learned some commands. Then we created a small OSGi application that shows servlets, OSGi services, blueprint and the whiteboard pattern.
-
-In the next tutorial we take a look at using Apache Camel and Apache CXF on OSGi.
-
-Back to [Karaf Tutorials|:Karaf Tutorials]
