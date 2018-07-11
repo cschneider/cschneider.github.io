@@ -1,37 +1,6 @@
-## Welcome to GitHub Pages
+## Welcome to liquid-reality, the Blog of Christian Schneider
 
-You can use the [editor on GitHub](https://github.com/cschneider/cschneider.github.io/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+I am a computer scientist working at Adobe on the Adobe Experience Manager Platform team. We providing the core of AEM based on open source projects (Apache Sling, Apache Felix, ...) and extended with some Adobe specific code for our feature teams to create Experience manager on top. I am working on quite a few [Apache open source projects](http://people.apache.org/phonebook.html?uid=cschneider) like Felix, Karaf, CXF, Camel.  
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+I am interested in clean code and modular software design. 
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/cschneider/cschneider.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
