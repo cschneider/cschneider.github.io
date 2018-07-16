@@ -1,5 +1,5 @@
 ---
-title: Blog of Christian Schneider
+title: Blog
 layout: home
 ---
 
