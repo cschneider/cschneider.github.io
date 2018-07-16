@@ -40,7 +40,6 @@ Time | Description
 10/2009-12/2010 | **Software architect SOA at EnBW SIS for trading department**<br>- Responsible for managing general software architecture EnBW Trading<br>- Consulting, coaching, traings for SOA and software architecture<br>- Coordination of libraries and code shared between teams<br>- Coordination of selection and delivery of developer tools
 since 08/2009 | **Volunteer work at Apache Software Foundation**<br>- Apache member and committer at several Apache projects focusing on webservices, integration and SOA (CXF, Camel, Karaf, Aries, Syncope)
 01/2011-09/2017 | **Open source software architect and developer in the Talend Apache team**<br>Development of several open source projects like Apache CXF, Camel, Karaf, Aries in coordination with ESB product teams and professional services.<br>Trainings and architecture consulting at customers with focus on OSGi, SOA and integration.
-since
 since 10/2017 | **Computer Scientist at Adobe Research Switzerland**<br>- Adobe experience manager platform Team.<br>- Experience Cloud design, Cloud level Content Distribution
 
 ## Reference projects
