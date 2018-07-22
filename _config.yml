@@ -1,7 +1,6 @@
 title: Liquid Reality
 email: chris@die-schneider.net
-description: >-
-  This blog is about architecture and modularity.
+description: This blog is about architecture and modularity
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://www.liquid-reality.de"
 twitter_username: schneider_chris
