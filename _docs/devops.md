@@ -3,7 +3,14 @@ title: Devops
 layout: default
 ---
 
+![Image](devops.png)
+
 ## Roles
+
+Remember one person can have more than one role. In conventional companies each role is given to different persons in different business units.
+In devops each team lives all those roles and thus takes responsibility over the whole development cycle.
+
+Additionally in some cases the release build and deployment is automated to automatically bring changes into test and even production systems.
 
 ### Developer
 
@@ -17,7 +24,7 @@ Responsible for creating a release of source code that can be released to produc
 
 Responsible for systems / software in a stage. Deploys and undeploys software and does the configuration.
 
-## Systems
+## Repository
 
 ### Source Code Repository
 Stores the source code and tracks changes and release versions

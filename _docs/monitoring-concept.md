@@ -3,7 +3,7 @@ title: Monitoring concept
 layout: default
 ---
 
-
+![Image](monitoring-concept.png)
 
 ## Sensor
 
