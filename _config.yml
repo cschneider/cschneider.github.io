@@ -10,5 +10,10 @@ show_excerpts: true
 markdown: kramdown
 theme: minima
 #theme: type-on-strap
+collections:
+  docs:
+    output: true
+  experience:
+    output: true
 plugins:
   - jekyll-feed
