@@ -9,6 +9,11 @@ linkedin_username: christian-schneider-99327157
 show_excerpts: true
 markdown: kramdown
 theme: minima
+header_pages:
+  - blog.md
+  - docs.md
+  - experience.md
+  - impressum.md
 #theme: type-on-strap
 collections:
   docs:
@@ -17,3 +22,5 @@ collections:
     output: true
 plugins:
   - jekyll-feed
+minima:
+  date_format: "%Y-%m-%d"
