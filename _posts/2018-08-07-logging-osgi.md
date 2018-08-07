@@ -5,7 +5,7 @@ date:   2018-08-07
 tags: declarative-services OSGi logback logging
 ---
 
-Logging in OSGi seemed to be an arcane thing for quite some time. On the logback website there is still this explanation from Ekke which was surely good at 2008 but in 2018 people do not accept creating your own logging bridges, adding config using fragments and tweaking start levels.
+Logging in OSGi seemed to be an arcane thing for quite some time. On the logback website there is still [this explanation by Ekke](http://ekkes-corner.blogspot.com/2008/10/index-blogseries-logging-in-osgi.html) which was surely good 2008 but in 2018 people do not accept creating their own logging bridges, adding config using fragments and tweaking start levels.
 
 Luckily this all improved quite a lot. Apache Karaf uses pax-logging and there is now also the [felix logback support bundle](http://felix.apache.org/documentation/subprojects/apache-felix-logback.html). In this article I will focus on the later as it is simple to setup and has some nice features.
 
