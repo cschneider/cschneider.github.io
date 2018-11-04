@@ -1,6 +1,5 @@
 title: Liquid Reality
 email: chris@die-schneider.net
-gem "jekyll", ">= 3.8.4"
 description: This blog is about architecture and modularity
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://www.liquid-reality.de"
