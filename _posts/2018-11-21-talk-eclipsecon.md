@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Popular patterns revisited on OSGi"
+title:  Popular patterns revisited on OSGi
 date:   2018-11-21
 tags: OSGi patterns cloud microservices circuit breaker
 ---
