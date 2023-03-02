@@ -44,6 +44,14 @@ since 10/2017 | **Computer Scientist at Adobe Research Switzerland**<br>- Adobe 
 
 ## Reference projects
 
+### Adobe
+
+* Kafka based solution for Adobe Experience Manager (AEM) content syndication handling the load of several thousand single tenant environments in 30+ kubernetes clusters. Per cluster multi tenant services based on Spring boot.
+* AEM Eventing infrastructure allowing customers to subscribe to AEM events
+* AEM API-First initiave providing redocly based API documentation (openapi) and playgrounds for all AEM APIs
+* Automated deployment infrastructure based of Argo CD. Providing templates for easy deployment setup for all AEM teams.
+* Templates and documentation for Microservices in AEM envrionment based on Spring boot.
+
 ### Talend
 
 * Refactoring of Apache Karaf for Version 3.0 to make it more modular
